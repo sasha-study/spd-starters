@@ -9,9 +9,4 @@
        (circle 40 "solid" "yellow")
        (circle 40 "solid" "green"))
 
-(define (draw_circle color)
-  (circle 40 "solid" color)
-  )
-
-(draw_circle "blue")
-
+;; just a comment 

@@ -1,0 +1,45 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |my experiments|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+"one"
+(string-append "One" "-two" "-3")
+;(string-append "One" "-two" 333)
+
+(string-length "one")
+
+(substring "123456" 0 3)
+
+
+(require 2htdp/image)
+
+(circle 10 "solid" "green")
+(rectangle 10 10 "outline" "blue")
+(text "some" 16 "orange")
+
+(above (circle 10 "solid" "red")
+       (circle 20 "outline" "green")
+       (circle 30 "outline" "blue"))
+
+(overlay (circle 10 "solid" "red")
+       (circle 20 "outline" "green")
+       (circle 30 "outline" "blue"))
+
+(overlay (above
+          (circle 10 "solid" "yellow")
+          (circle 10 "solid" "orange"))
+       (circle 21 "outline" "green")
+       )
+
+
+(overlay (text "STOP" 14 "white") 
+
+         (regular-polygon 20 8 "solid" "red"))
+
+
+(beside (text "first" 12 "red") (text "second" 14 "green") (square 10 "solid" "orange"))
+
+
+(define X 100)
+(define Y 200)
+
+(* X Y)
