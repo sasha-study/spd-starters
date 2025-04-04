@@ -37,6 +37,7 @@
 (check-expect (count (list 1 2 3 4 5)) (make-counts 3 2))
 (check-expect (count (list -1 -2 3 -4 5)) (make-counts 3 2))
 
+
 (define (count1 lon acc)
   (cond [(empty? lon) acc]
         [(odd? (first lon))
@@ -51,5 +52,28 @@
         [(odd? (first lon)) (count2 (rest lon) (add1 odds) evens)]
         [(even? (first lon)) (count2 (rest lon) odds (add1 evens))]))
 
-(define (count lon) (count1 lon (make-counts 0 0)))
+;(define (count lon) (count1 lon (make-counts 0 0)))
 ;(define (count lon) (count2 lon 0 0))
+
+
+
+#;
+(define (count lon)
+  (local [(define (count0 lon odds evens)
+            (cond [(empty? lon) (make-counts odds evens)]
+                  [else
+                   (if (= (remainder (first lon) 2) 0)
+                       (count0 (rest lon) odds (add1 evens))
+                       (count0 (rest lon) (add1 odds) evens))]))]
+    (count0 lon 0 0 )))
+
+
+(define (count lon)
+  (local [(define (count0 lon evens)
+            (cond [(empty? lon) evens]
+                  [else
+                   (if (= (remainder (first lon) 2) 0)
+                       (count0 (rest lon)  (add1 evens))
+                       (count0 (rest lon) evens))]))
+          (define EVENS (count0 lon 0))]
+    (make-counts (- (length lon) EVENS) EVENS)))

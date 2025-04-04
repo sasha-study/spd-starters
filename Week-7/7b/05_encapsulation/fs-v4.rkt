@@ -55,25 +55,28 @@
 ;; Element -> Integer
 ;; ListOfElement -> Integer
 ;; produce the sum of all the data in element (and its subs)
-(check-expect (sum-data--element F1) 1)
-(check-expect (sum-data--loe empty) 0)
-(check-expect (sum-data--element D5) 3)
-(check-expect (sum-data--element D4) (+ 1 2))
-(check-expect (sum-data--element D6) (+ 1 2 3))
+(check-expect (sum-data F1) 1)
+(check-expect (sum-data D5) 3)
+(check-expect (sum-data D4) (+ 1 2))
+(check-expect (sum-data D6) (+ 1 2 3))
 
 ;(define (sum-data--element e) 0)  ;stubs
 ;(define (sum-data--loe loe) 0)
 
-(define (sum-data--element e)
-  (if (zero? (elt-data e))
-      (sum-data--loe (elt-subs e))
-      (elt-data e)))
+(define (sum-data e)
+  (local [
+          (define (sum-data--element e)
+            (if (zero? (elt-data e))
+                (sum-data--loe (elt-subs e))
+                (elt-data e)))
 
-(define (sum-data--loe loe)
-  (cond [(empty? loe) 0]
-        [else
-         (+ (sum-data--element (first loe))
-            (sum-data--loe (rest loe)))]))
+          (define (sum-data--loe loe)
+            (cond [(empty? loe) 0]
+                  [else
+                   (+ (sum-data--element (first loe))
+                      (sum-data--loe (rest loe)))]))
+          ]
+    (sum-data--element e)))
 
 ;
 ; PROBLEM
@@ -159,3 +162,4 @@
 ;   - And... be sure to USE the recipe. Not just follow it, but let it help you.
 ;     For example, work out a number of examples BEFORE you try to code the function.
 ;
+

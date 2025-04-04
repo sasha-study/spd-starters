@@ -53,7 +53,7 @@
                        (count (rest lon) odds (add1 evens)))]))]
     (count lon0 0 0)))
 
-#;
+
 ; <template according to (listof Number) + accumulator>
 (define (count lon0)
   ;; rsf: Count; the counts so far
